@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.shoppingcart.BackEnd.dao.UserDAO;
+import com.shoppingcart.BackEnd.domain.Supplier;
 import com.shoppingcart.BackEnd.domain.User;
 
 @Transactional
@@ -46,7 +47,7 @@ public class UserDAOImpl implements UserDAO {
 	public User get(String email) {
 		// TODO Auto-generated method stub
 
-		return sessionFactory.getCurrentSession().load(User.class, email);
+		return (User) sessionFactory.getCurrentSession().load(User.class, email);
 
 	}
 
@@ -62,15 +63,23 @@ public class UserDAOImpl implements UserDAO {
 
 	}
 
-	public User validate(String email, String password) {
-		// TODO Auto-generated method stub
-		return (User) sessionFactory.getCurrentSession().createCriteria(User.class)
-				.add(Restrictions.eqOrIsNull("email", email)).add(Restrictions.eq("password", password)).uniqueResult();
+	public boolean validate(String email, String password) {
+		String hql = ("from User where email ='" + email + "' and password = '" + password + "' ");
+
+		if (sessionFactory.getCurrentSession().createQuery(hql).uniqueResult() == null) {
+			return false;
+		}
+		return true;
 	}
 
 	public List<User> list() {
 		// TODO Auto-generated method stub
-		return sessionFactory.getCurrentSession().createQuery("from user").getResultList();
+		return sessionFactory.getCurrentSession().createQuery("from User").getResultList();
+	}
+
+	public User getUserByEmail(String email) {
+		return (User) sessionFactory.getCurrentSession().createQuery("from User where email = '" + email + "' ")
+				.uniqueResult();
 	}
 
 }
