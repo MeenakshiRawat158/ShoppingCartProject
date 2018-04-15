@@ -44,7 +44,7 @@ p {
 			<div class="item  col-xs-4 col-lg-4">
 				<div class="thumbnail">
 					<img class="group list-group-image" style="height: 199px;"
-						src="<c:url value="/images/${productItem.id}.png" />"
+						src="<c:url value="/images/${productItem.id}.jpg" />"
 						alt="" />
 
 					<div class="caption">

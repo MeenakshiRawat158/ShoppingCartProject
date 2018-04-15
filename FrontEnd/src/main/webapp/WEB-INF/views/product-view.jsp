@@ -8,7 +8,7 @@
 					<div class="preview-pic tab-content">
 						<div class="tab-pane active" id="pic-1">
 							<img
-								src="<c:url value="/images/${mainproduct.id}.png" />" />
+								src="<c:url value="/images/${mainproduct.id}.jpg" />" />
 						</div>
 					</div>
 				</div>
